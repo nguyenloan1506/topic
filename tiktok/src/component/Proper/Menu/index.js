@@ -54,6 +54,7 @@ function Menu({ children, items = [], onChange = defaultFunction}) {
                     </ProperWrapper>
                 </div>
             )}
+            onHide={() => setHistory(prev => prev.slice(0, 1))}
         >
             {children}
         </Tippy>
