@@ -11,6 +11,9 @@ import { Wrapper as ProperWrapper } from '~/component/Proper';
 import AccountItem from '~/component/AccountItem';
 import { useDebounce } from '~/hooks';
 import styles from './Search.module.scss';
+import axios from 'axios';
+import * as request from '~/utils/request';
+import * as searchService from '~/apiServices/SearchServices';
 
 const cx = classNames.bind(styles);
 
@@ -31,18 +34,39 @@ function Search() {
             return;
         }
 
-        setLoading(true);
+        // setLoading(true);
 
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res.data);
-                setSearchResult(res.data);
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
+        const fetchApi = async () => {
+            setLoading(true);
+
+            const result = await searchService.search(debounced);
+            setSearchResult(result);
+
+            setLoading(false);
+
+            // try {
+            //     const res = await request.get(`users/search`, {
+            //         params: {
+            //             q: debounced,
+            //             type: 'less'
+            //         }
+            //     });
+            //     setSearchResult(res.data);
+            //     setLoading(false);
+            // } catch (error) {
+            //     setLoading(false);
+            // }
+                // .then((res) => {
+                //     console.log(res.data);
+                //     setSearchResult(res.data);
+                //     setLoading(false);
+                // })
+                // .catch(() => {
+                //     setLoading(false);
+                // });
+        }
+
+        fetchApi();
     }, [debounced]);
 
     const handleClear = () => {
