@@ -16,12 +16,16 @@ import {
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
-import Button from '~/component/Button';
+import Button from '~/component/Button/Button';
 import styles from './Header.module.scss';
 import images from '~/asset/images';
 import Menu from '~/component/Proper/Menu';
 import Image from '~/component/Image';
 import Search from '../Search';
+import { Link } from 'react-router-dom';
+import config from '~/config';
+
+
 // tra ve 1 method/ function de dung class => viet duoc class name co dau -
 const cx = classNames.bind(styles);
 
@@ -94,7 +98,13 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('logo')}>
-                    <img src={images.logo} alt="TikTok" />
+                    <Link 
+                        to={config.routes.home}
+                        className={cx('logo-link')}
+                    >
+                        <img src={images.logo} alt="TikTok" />
+                    </Link>
+
                 </div>
                 
                 {/* search */}
@@ -121,7 +131,7 @@ function Header() {
                     <Menu items={currentUser ? userMenu : MENU_ITEM} onChange={handleMenuChange}>
                         {currentUser ? (
                             <Image
-                                src="https://img1.freepik.com/premium-vector/cute-corgi-cartoon-vector-icon-illustration-animal-nature-icon-concept-isolated-premium-vector-flat-cartoon-style_547598-43.jpg?w=2000"
+                                src="https://img.freepik.com/premium-vector/cute-corgi-cartoon-vector-icon-illustration-animal-nature-icon-concept-isolated-premium-vector-flat-cartoon-style_547598-43.jpg?w=2000"
                                 className={cx('user-avatar')}
                                 alt="Nguyen van A"
                             />
@@ -131,7 +141,7 @@ function Header() {
                             </button>
                         )}
                     </Menu>
-                </div>
+                </div> 
             </div>
         </header>
     );
