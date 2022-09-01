@@ -4,6 +4,7 @@ import styles from './Sidebar.module.scss';
 import Menu, {MenuItem} from './Menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUserGroup, faVideoCamera } from '@fortawesome/free-solid-svg-icons';
+import SuggestedAccounts from '~/component/SuggestedAccounts';
 
 const cx = classNames.bind(styles);
 
@@ -29,6 +30,10 @@ function Sidebar() {
                     icon={<FontAwesomeIcon icon={faVideoCamera} />}
                 />
             </Menu>
+
+            <SuggestedAccounts label="Suggested accounts" />
+            <SuggestedAccounts label="Following accounts" />
+        
         </aside>
     );
 }
